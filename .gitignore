@@ -1,0 +1,4 @@
+nCook
+*.o
+tags
+*.vim
