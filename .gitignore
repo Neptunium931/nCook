@@ -5,3 +5,4 @@ tags
 *.vim
 .cache
 compile_commands.json
+nCook.db

@@ -1,5 +1,6 @@
 #include "sqlite/initSqlite.h"
 #include <criterion/criterion.h>
+#include <unistd.h>
 
 Test(sqlite, pathDefault)
 {
@@ -21,8 +22,16 @@ Test(sqlite, pathCustomEmpty)
   cr_assert_str_eq(path, "nCook.db");
 }
 
+bool testIfFileExists(const char *path);
+bool
+testIfFileExists(const char *path)
+{
+  return access(path, F_OK) == 0;
+}
+
 Test(sqlite, initSqlite)
 {
   initDataBase();
+  cr_assert(testIfFileExists(getSqlitePath()));
   closeDataBase();
 }
