@@ -3,3 +3,5 @@ nCook_tests_*
 *.o
 tags
 *.vim
+.cache
+compile_commands.json
