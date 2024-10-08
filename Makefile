@@ -9,8 +9,8 @@ TESTS = nCook_tests_Sqlite3
 nCook_src = ./src/nCook.c
 nCook_obj = $(nCook_src:.c=.c.o) 
 
-nCook_tests_Sqlite3_src = ./src/nCook.c \
-													./test/sqlite.c
+nCook_tests_Sqlite3_src = ./test/sqlite.c \
+													./src/sqlite/initSqlite.c
 nCook_tests_Sqlite3_obj = $(nCook_tests_Sqlite3_src:.c=.c.o)
 
 nCook: $(nCook_obj)
@@ -29,7 +29,7 @@ clean:
 
 check: $(TESTS)
 	for t in $(TESTS); do \
-		sh -c "./$$t"; \
+		sh -c "./$$t --tap"; \
 	done
 
 distcheck:

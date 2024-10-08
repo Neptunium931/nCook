@@ -2,7 +2,5 @@
 #define _initSqlite_h
 #include <sqlite3.h>
 
-static sqlite3 *db;
-
-void initSqlite();
+const char *getSqlitePath(void);
 #endif // !_initSqlite_h
