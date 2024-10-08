@@ -3,4 +3,8 @@
 #include <sqlite3.h>
 
 const char *getSqlitePath(void);
+
+void initDataBase(void);
+void closeDataBase(void);
+
 #endif // !_initSqlite_h

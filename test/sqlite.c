@@ -21,4 +21,8 @@ Test(sqlite, pathCustomEmpty)
   cr_assert_str_eq(path, "nCook.db");
 }
 
-Test(sqlite, initSqlite) {}
+Test(sqlite, initSqlite)
+{
+  initDataBase();
+  closeDataBase();
+}
