@@ -1,31 +1,36 @@
 # Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 # See end of file for extended copyright information.
-CC ?= cc
-CFLAGS ?= -g
-LDFLAGS ?= -g
+
+include config.mk
+
+TARGET = nCook
+TESTS = nCook_tests_Sqlite3
 
 nCook_src = ./src/nCook.c
-
-LDFLAGS += $(shell pkg-config --libs sqlite3)
-LDFLAGS += $(shell pkg-config --libs ncurses)
-
-CFLAGS += $(shell pkg-config --cflags sqlite3)
-CFLAGS += $(shell pkg-config --cflags ncurses)
-CFLAGS += -I./src
-
 nCook_obj = $(nCook_src:.c=.c.o) 
+
+nCook_tests_Sqlite3_src = ./src/nCook.c \
+													./test/sqlite.c
+nCook_tests_Sqlite3_obj = $(nCook_tests_Sqlite3_src:.c=.c.o)
 
 nCook: $(nCook_obj)
 	$(CC) -o $@ $(nCook_obj) $(LDFLAGS)
+
+nCook_tests_Sqlite3: $(nCook_tests_Sqlite3_obj)
+	$(CC) -o $@ $(nCook_tests_Sqlite3_obj) $(LDFLAGS)
 
 %.c.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(nCook_obj)
-	rm -f nCook
+	rm -f $(nCook_obj) $(nCook_tests_Sqlite3_obj)
+	rm -f $(TARGET)
+	rm -f $(TESTS)
 
-check: nCook
+check: $(TESTS)
+	for t in $(TESTS); do \
+		sh -c "./$$t"; \
+	done
 
 distcheck:
 

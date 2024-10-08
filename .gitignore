@@ -1,4 +1,5 @@
 nCook
+nCook_tests_*
 *.o
 tags
 *.vim
