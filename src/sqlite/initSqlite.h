@@ -4,7 +4,7 @@
 
 const char *getSqlitePath(void);
 
-void initDataBase(void);
+char initDataBase(void);
 void closeDataBase(void);
 
 #endif // !_initSqlite_h

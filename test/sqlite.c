@@ -43,3 +43,10 @@ Test(sqlite, initSqlite, .fini = removeDataBase)
   cr_assert(testIfFileExists(getSqlitePath()));
   closeDataBase();
 }
+
+Test(sqlite, initDBPathNotExist)
+{
+  setenv("nCookDB", "./tmp/nCook.db", 1);
+  cr_assert_eq(initDataBase(), -1);
+  closeDataBase();
+}

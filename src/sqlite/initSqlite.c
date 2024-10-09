@@ -11,12 +11,13 @@ getSqlitePath(void)
   return path;
 }
 
-void
+char
 initDataBase(void)
 {
-  sqlite3_open(getSqlitePath(), &db);
-  if (db == NULL)
-    exit(EXIT_FAILURE);
+  int rc = sqlite3_open(getSqlitePath(), &db);
+  if (rc == 0)
+    return 0;
+  return -1;
 }
 
 void
