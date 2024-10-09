@@ -1,0 +1,3 @@
+in testIfTableExists race conditions
+
+callbackIfExists not executer beffore a retune of testIfTableExists
