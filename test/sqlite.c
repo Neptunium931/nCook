@@ -1,5 +1,6 @@
 #include "sqlite/initSqlite.h"
 #include <criterion/criterion.h>
+#include <stdio.h>
 #include <unistd.h>
 
 Test(sqlite, pathDefault)
@@ -29,7 +30,14 @@ testIfFileExists(const char *path)
   return access(path, F_OK) == 0;
 }
 
-Test(sqlite, initSqlite)
+void removeDataBase(void);
+void
+removeDataBase(void)
+{
+  remove(getSqlitePath());
+}
+
+Test(sqlite, initSqlite, .fini = removeDataBase)
 {
   initDataBase();
   cr_assert(testIfFileExists(getSqlitePath()));
