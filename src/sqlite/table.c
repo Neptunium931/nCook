@@ -1,31 +1,18 @@
 // Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 // See end of file for extended copyright information.
-#include "initSqlite.h"
+#include "table.h"
+#include <sqlite3.h>
 #include <stdlib.h>
-sqlite3 *db;
-
-const char *
-getSqlitePath(void)
-{
-  const char *path = getenv("nCookDB");
-  if (path == NULL || *path == '\0')
-    path = "nCook.db";
-  return path;
-}
-
+extern sqlite3 *db;
 char
-initDataBase(void)
+createTable(const char *name, int first, ...)
 {
-  int rc = sqlite3_open(getSqlitePath(), &db);
-  if (rc == 0)
-    return 0;
-  return -1;
-}
-
-void
-closeDataBase(void)
-{
-  sqlite3_close(db);
+  sqlite3_exec(db,
+               "CREATE TABLE IF NOT EXISTS name (id INTEGER PRIMARY KEY);",
+               NULL,
+               NULL,
+               NULL);
+  return 0;
 }
 // This file is part of nCook
 //

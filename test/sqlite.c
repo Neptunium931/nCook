@@ -1,6 +1,9 @@
 // Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 // See end of file for extended copyright information.
+#include "util/sqlite.h"
 #include "sqlite/initSqlite.h"
+#include "sqlite/table.h"
+#include "sqlite/type.h"
 #include <criterion/criterion.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -50,6 +53,14 @@ Test(sqlite, initDBPathNotExist)
 {
   setenv("nCookDB", "./tmp/nCook.db", 1);
   cr_assert_eq(initDataBase(), -1);
+  closeDataBase();
+}
+
+Test(sqlite, createTable, .fini = removeDataBase)
+{
+  initDataBase();
+  createTable("name", INT | PK);
+  cr_assert(testIfTableExists("name"));
   closeDataBase();
 }
 // This file is part of nCook

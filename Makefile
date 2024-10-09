@@ -6,11 +6,16 @@ include config.mk
 TARGET = nCook
 TESTS = nCook_tests_Sqlite3
 
-nCook_src = ./src/nCook.c
+nCook_src = ./src/nCook.c \
+						./src/sqlite/initSqlite.c \
+						./src/sqlite/table.c
 nCook_obj = $(nCook_src:.c=.c.o) 
 
+CFLAGS += -I./test/
 nCook_tests_Sqlite3_src = ./test/sqlite.c \
-													./src/sqlite/initSqlite.c
+													./src/sqlite/initSqlite.c \
+													./src/sqlite/table.c \
+													./test/util/sqlite.c
 nCook_tests_Sqlite3_obj = $(nCook_tests_Sqlite3_src:.c=.c.o)
 
 nCook: $(nCook_obj)

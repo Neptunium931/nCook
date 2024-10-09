@@ -1,32 +1,18 @@
 // Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 // See end of file for extended copyright information.
-#include "initSqlite.h"
-#include <stdlib.h>
-sqlite3 *db;
-
-const char *
-getSqlitePath(void)
+#ifndef TYPE_H
+#define TYPE_H
+enum ColumnType
 {
-  const char *path = getenv("nCookDB");
-  if (path == NULL || *path == '\0')
-    path = "nCook.db";
-  return path;
-}
-
-char
-initDataBase(void)
-{
-  int rc = sqlite3_open(getSqlitePath(), &db);
-  if (rc == 0)
-    return 0;
-  return -1;
-}
-
-void
-closeDataBase(void)
-{
-  sqlite3_close(db);
-}
+  INT = 1,
+  TEXT = 2,
+  BLOB = 4,
+  PK = 8,
+  NULL = 16,
+  UNIQUE = 32,
+  NOTNULL = 64
+};
+#endif
 // This file is part of nCook
 //
 // BSD 3-Clause License
