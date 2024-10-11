@@ -17,7 +17,7 @@ char
 initDataBase(void)
 {
   int rc = sqlite3_open(getSqlitePath(), &db);
-  if (rc == 0)
+  if (rc == SQLITE_OK)
     return 0;
   return -1;
 }

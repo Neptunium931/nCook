@@ -58,9 +58,9 @@ Test(sqlite, initDBPathNotExist)
 
 Test(sqlite, createTable, .fini = removeDataBase)
 {
+  setenv("nCookDB", "./nCookCreate.db", 1);
   initDataBase();
   createTable("name", INT | PK);
-  // if it fails it may be due to the disk
   cr_assert(testIfTableExists("name"));
   closeDataBase();
 }
