@@ -2,16 +2,23 @@
 // See end of file for extended copyright information.
 #include "table.h"
 #include <sqlite3.h>
+#include <stdio.h>
 #include <stdlib.h>
 extern sqlite3 *db;
 char
 createTable(const char *name, int first, ...)
 {
-  sqlite3_exec(db,
-               "CREATE TABLE IF NOT EXISTS name (id INTEGER PRIMARY KEY);",
-               NULL,
-               NULL,
-               NULL);
+  int rc =
+    sqlite3_exec(db,
+                 "CREATE TABLE IF NOT EXISTS name (id INTEGER PRIMARY KEY);",
+                 NULL,
+                 NULL,
+                 NULL);
+  if (rc != SQLITE_OK)
+  {
+    fprintf(stderr, "Error: %s\n", sqlite3_errmsg(db));
+    return -1;
+  }
   return 0;
 }
 // This file is part of nCook

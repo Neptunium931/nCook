@@ -60,6 +60,7 @@ Test(sqlite, createTable, .fini = removeDataBase)
 {
   initDataBase();
   createTable("name", INT | PK);
+  // if it fails it may be due to the disk
   cr_assert(testIfTableExists("name"));
   closeDataBase();
 }
