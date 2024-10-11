@@ -12,6 +12,8 @@ nCook_src = ./src/nCook.c \
 nCook_obj = $(nCook_src:.c=.c.o) 
 
 CFLAGS += -I./test/
+CFLAGS += -fsanitize=address
+LDFLAGS += -fsanitize=address
 nCook_tests_Sqlite3_src = ./test/sqlite.c \
 													./src/sqlite/initSqlite.c \
 													./src/sqlite/table.c \
