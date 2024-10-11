@@ -8,12 +8,10 @@ extern sqlite3 *db;
 char
 createTable(const char *name, int first, ...)
 {
-  int rc =
-    sqlite3_exec(db,
-                 "CREATE TABLE IF NOT EXISTS name (id INTEGER PRIMARY KEY);",
-                 NULL,
-                 NULL,
-                 NULL);
+  char sql[1024];
+  sprintf(
+    sql, "CREATE TABLE IF NOT EXISTS %s (id INTEGER PRIMARY KEY);", name);
+  int rc = sqlite3_exec(db, sql, NULL, NULL, NULL);
   if (rc != SQLITE_OK)
   {
     fprintf(stderr, "Error: %s\n", sqlite3_errmsg(db));
