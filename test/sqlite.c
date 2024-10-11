@@ -64,6 +64,16 @@ Test(sqlite, createTable, .fini = removeDataBase)
   cr_assert(testIfTableExists("name"));
   closeDataBase();
 }
+
+Test(sqlite, createTableIfExists, .fini = removeDataBase)
+{
+  setenv("nCookDB", "./nCookCreate2.db", 1);
+  initDataBase();
+  createTable("name", INT | PK);
+  createTable("name", INT | PK);
+  cr_assert(testIfTableExists("name"));
+  closeDataBase();
+}
 // This file is part of nCook
 //
 // BSD 3-Clause License
