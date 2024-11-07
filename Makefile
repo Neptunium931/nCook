@@ -8,7 +8,11 @@ TESTS = nCook_tests_Sqlite3
 
 nCook_src = ./src/nCook.c \
 						./src/sqlite/initSqlite.c \
-						./src/sqlite/table.c
+						./src/sqlite/initSqlite.h \
+						./src/sqlite/table.c \
+						./src/sqlite/table.h \
+						./src/sqlite/type.h \
+
 nCook_obj = $(nCook_src:.c=.c.o) 
 
 CFLAGS += -I./test/
@@ -17,7 +21,9 @@ LDFLAGS += -fsanitize=address
 nCook_tests_Sqlite3_src = ./test/sqlite.c \
 													./src/sqlite/initSqlite.c \
 													./src/sqlite/table.c \
-													./test/util/sqlite.c
+													./test/util/sqlite.c \
+													./test/util/sqlite.h
+
 nCook_tests_Sqlite3_obj = $(nCook_tests_Sqlite3_src:.c=.c.o)
 
 nCook: $(nCook_obj)
@@ -40,6 +46,18 @@ check: $(TESTS)
 	done
 
 distcheck:
+
+dist:
+	tar cvf $(TARGET).tar $(nCook_src) $(nCook_tests_Sqlite3_src) Makefile config.mk LICENSE
+
+dist-gzip: dist
+	gzip $(TARGET).tar
+
+dist-bzip2: dist
+	bzip2 $(TARGET).tar
+
+dist-xz: dist
+	xz $(TARGET).tar
 
 .PHONY: clean check distcheck
 
