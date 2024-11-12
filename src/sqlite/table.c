@@ -4,19 +4,46 @@
 #include <sqlite3.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 extern sqlite3 *db;
+
 char
-createTable(const char *name, int first, ...)
+createTable(const char *name, unsigned int size, Column *c)
 {
-  char sql[1024];
-  sprintf(
-    sql, "CREATE TABLE IF NOT EXISTS %s (id INTEGER PRIMARY KEY);", name);
+  char sql[BUFSIZ];
+  sprintf(sql, "CREATE TABLE IF NOT EXISTS %s (", name);
+  for (unsigned int i = 0; i < size; i++)
+  {
+    sprintf(sql + strlen(sql), "%s ", c[i].name);
+    if (c[i].type & INT)
+      sprintf(sql + strlen(sql), "INTEGER ");
+    if (c[i].type & TEXT)
+      sprintf(sql + strlen(sql), "TEXT ");
+    if (c[i].type & BLOB)
+      sprintf(sql + strlen(sql), "BLOB ");
+    if (c[i].type & PK)
+      sprintf(sql + strlen(sql), "PRIMARY KEY ");
+    if (c[i].type & null)
+      sprintf(sql + strlen(sql), "NULL ");
+    if (c[i].type & NOTNULL)
+      sprintf(sql + strlen(sql), "NOT NULL ");
+    if (c[i].type & UNIQUE)
+      sprintf(sql + strlen(sql), "UNIQUE ");
+    if (i < size - 1)
+      sprintf(sql + strlen(sql), ", ");
+  }
+
+  sprintf(sql + strlen(sql), ");");
+  printf("%s\n", sql);
+
   int rc = sqlite3_exec(db, sql, NULL, NULL, NULL);
   if (rc != SQLITE_OK)
   {
     fprintf(stderr, "Error: %s\n", sqlite3_errmsg(db));
     return -1;
   }
+
   return 0;
 }
 // This file is part of nCook

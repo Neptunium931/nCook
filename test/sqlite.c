@@ -60,7 +60,7 @@ Test(sqlite, createTable, .fini = removeDataBase)
 {
   setenv("nCookDB", "./nCookCreate.db", 1);
   initDataBase();
-  createTable("name", INT | PK);
+  TABLE("name", (Column){ "id", INT | PK });
   cr_assert(testIfTableExists("name"));
   closeDataBase();
 }
@@ -69,8 +69,8 @@ Test(sqlite, createTableIfExists, .fini = removeDataBase)
 {
   setenv("nCookDB", "./nCookCreate2.db", 1);
   initDataBase();
-  createTable("name", INT | PK);
-  createTable("name", INT | PK);
+  TABLE("name", (Column){ "id", INT | PK });
+  TABLE("name", (Column){ "id", INT | PK });
   cr_assert(testIfTableExists("name"));
   closeDataBase();
 }
@@ -79,8 +79,8 @@ Test(sqlite, createMultipleTable, .fini = removeDataBase)
 {
   setenv("nCookDB", "./nCookCreate3.db", 1);
   initDataBase();
-  createTable("name", INT | PK);
-  createTable("name2", INT | PK);
+  TABLE("name", (Column){ "id", INT | PK });
+  TABLE("name2", (Column){ "id", INT | PK });
   cr_assert(testIfTableExists("name"));
   cr_assert(testIfTableExists("name2"));
   closeDataBase();

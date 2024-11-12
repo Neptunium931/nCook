@@ -2,7 +2,15 @@
 // See end of file for extended copyright information.
 #ifndef _table_h
 #define _table_h
-char createTable(const char *name, int first, ...);
+#include "type.h"
+char createTable(const char *name, unsigned int size, Column *c);
+
+#define TABLE(name, ...)                                                      \
+  {                                                                           \
+    Column __c[] = { __VA_ARGS__ };                                           \
+    int __s = sizeof(__c) / sizeof(Column);                                   \
+    createTable(name, __s, __c);                                              \
+  }
 #endif
 // This file is part of nCook
 //

@@ -8,10 +8,16 @@ enum ColumnType
   TEXT = 2,
   BLOB = 4,
   PK = 8,
-  NULL = 16,
+  null = 16,
   UNIQUE = 32,
   NOTNULL = 64
 };
+
+typedef struct
+{
+  char name[256];
+  enum ColumnType type;
+} Column;
 #endif
 // This file is part of nCook
 //

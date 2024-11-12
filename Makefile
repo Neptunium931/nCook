@@ -11,7 +11,7 @@ nCook_src = ./src/nCook.c \
 						./src/sqlite/initSqlite.h \
 						./src/sqlite/table.c \
 						./src/sqlite/table.h \
-						./src/sqlite/type.h \
+						./src/sqlite/type.h
 
 nCook_obj = $(nCook_src:.c=.c.o) 
 
@@ -20,9 +20,12 @@ CFLAGS += -fsanitize=address
 LDFLAGS += -fsanitize=address
 nCook_tests_Sqlite3_src = ./test/sqlite.c \
 													./src/sqlite/initSqlite.c \
+													./src/sqlite/initSqlite.h \
 													./src/sqlite/table.c \
+													./src/sqlite/table.h \
 													./test/util/sqlite.c \
-													./test/util/sqlite.h
+													./test/util/sqlite.h \
+													./src/sqlite/type.h
 
 nCook_tests_Sqlite3_obj = $(nCook_tests_Sqlite3_src:.c=.c.o)
 

@@ -1,13 +1,20 @@
 // Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 // See end of file for extended copyright information.
+#include "sqlite/initSqlite.h"
+#include "sqlite/table.h"
 #include <sqlite3.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int
 main(void)
 {
 
   printf("%s\n", sqlite3_libversion());
+  setenv("nCookDB", "./nCookCreate3.db", 1);
+  initDataBase();
+  TABLE("name", (Column){ "id", INT | PK });
+  // createTable("name", (Column){ "id", INT | PK });
 
   return 0;
 }
