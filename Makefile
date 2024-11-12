@@ -30,7 +30,7 @@ nCook: $(nCook_obj)
 	$(CC) -o $@ $(nCook_obj) $(LDFLAGS)
 
 nCook_tests_Sqlite3: $(nCook_tests_Sqlite3_obj)
-	$(CC) -o $@ $(nCook_tests_Sqlite3_obj) $(LDFLAGS)
+	$(CC) -o $@ $(nCook_tests_Sqlite3_obj) $(LDFLAGS) $(criterion_LDFLAGS)
 
 %.c.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
