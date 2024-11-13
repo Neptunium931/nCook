@@ -35,7 +35,6 @@ createTable(const char *name, unsigned int size, Column *c)
   }
 
   sprintf(sql + strlen(sql), ");");
-  printf("%s\n", sql);
 
   int rc = sqlite3_exec(db, sql, NULL, NULL, NULL);
   if (rc != SQLITE_OK)
