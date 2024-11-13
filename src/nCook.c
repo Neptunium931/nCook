@@ -11,11 +11,13 @@ main(void)
 {
 
   printf("%s\n", sqlite3_libversion());
-  setenv("nCookDB", "./nCookCreate3.db", 1);
+  setenv("nCookDB", "./nCook.db", 1);
   initDataBase();
-  TABLE("name", (Column){ "id", INT | PK });
-  // createTable("name", (Column){ "id", INT | PK });
-
+  TABLE("name",
+        (Column){ "id", INT | PK },
+        (Column){ "name", TEXT | NOTNULL },
+        (Column){ "age", INT | null });
+  closeDataBase();
   return 0;
 }
 
