@@ -86,6 +86,15 @@ Test(sqlite, createMultipleTable, .fini = removeDataBase)
   closeDataBase();
 }
 
+Test(sqlite, createTableMultipleColumn, .fini = removeDataBase)
+{
+  setenv("nCookDB", "./nCookCreate4.db", 1);
+  initDataBase();
+  TABLE(
+    "name", (Column){ "id", INT | PK }, (Column){ "name", TEXT | NOTNULL });
+  cr_assert_eq(getTypeOfColumn("name", "id"), INT | PK | null);
+  closeDataBase();
+}
 // This file is part of nCook
 //
 // BSD 3-Clause License

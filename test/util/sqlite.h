@@ -2,8 +2,10 @@
 // See end of file for extended copyright information.
 #ifndef _UTIL_SQLITE_H
 #define _UTIL_SQLITE_H
+#include "sqlite/type.h"
 #include <stdbool.h>
 bool testIfTableExists(const char *name);
+enum ColumnType getTypeOfColumn(const char *table, const char *column);
 #endif
 // This file is part of nCook
 //

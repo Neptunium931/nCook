@@ -1,8 +1,11 @@
 // Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 // See end of file for extended copyright information.
 #include "util/sqlite.h"
+#include "sqlite/type.h"
 #include <sqlite3.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 extern sqlite3 *db;
 
@@ -18,7 +21,7 @@ callbackIfExists(void *data, int argc, char **argv, char **azColName)
 bool
 testIfTableExists(const char *name)
 {
-  char sql[256];
+  char sql[BUFSIZ];
   sprintf(sql, "SELECT name FROM sqlite_master WHERE name = '%s'", name);
   int rc = sqlite3_exec(db, sql, callbackIfExists, NULL, NULL);
   if (rc != SQLITE_OK)
@@ -27,6 +30,55 @@ testIfTableExists(const char *name)
     return false;
   }
   return ret;
+}
+
+static enum ColumnType type = 0;
+static int
+callbackColumnType(void *data, int argc, char **argv, char **azColName)
+{
+  if (strcmp(argv[1], (char *)data) == 0)
+  {
+    if (strcmp(argv[2], "INTEGER") == 0)
+    {
+      type = INT;
+    }
+    else if (strcmp(argv[2], "TEXT") == 0)
+    {
+      type = TEXT;
+    }
+    else if (strcmp(argv[2], "BLOB") == 0)
+    {
+      type = BLOB;
+    }
+    if (atoi(argv[3]) == 1)
+    {
+      type |= NOTNULL;
+    }
+    else
+    {
+      type |= null;
+    }
+    if (atoi(argv[5]) == 1)
+    {
+      type |= PK;
+    }
+  }
+  return 0;
+}
+
+enum ColumnType
+getTypeOfColumn(const char *table, const char *column)
+{
+  char sql[BUFSIZ];
+  sprintf(sql, "PRAGMA table_info('%s');", table);
+  type = 0;
+  int rc = sqlite3_exec(db, sql, callbackColumnType, (void *)column, NULL);
+  if (rc != SQLITE_OK)
+  {
+    fprintf(stderr, "SQL error: %s\n", sqlite3_errmsg(db));
+    return -1;
+  }
+  return type;
 }
 // This file is part of nCook
 //
