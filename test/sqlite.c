@@ -93,6 +93,7 @@ Test(sqlite, createTableMultipleColumn, .fini = removeDataBase)
   TABLE(
     "name", (Column){ "id", INT | PK }, (Column){ "name", TEXT | NOTNULL });
   cr_assert_eq(getTypeOfColumn("name", "id"), INT | PK | null);
+  cr_assert_eq(getTypeOfColumn("name", "name"), TEXT | NOTNULL);
   closeDataBase();
 }
 // This file is part of nCook

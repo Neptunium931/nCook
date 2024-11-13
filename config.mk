@@ -4,6 +4,7 @@ CC = gcc
 CFLAGS ?= -g
 LDFLAGS ?= -g
 
+LDFLAGS += -I./src
 LDFLAGS += $(shell pkg-config --libs sqlite3)
 LDFLAGS += $(shell pkg-config --libs ncurses)
 LDFLAGS += -fno-strict-aliasing -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wformat=2 -Wcast-align -Wformat-nonliteral -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Winline -Wpacked -Wmissing-format-attribute -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Werror
