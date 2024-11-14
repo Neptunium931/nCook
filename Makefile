@@ -11,7 +11,11 @@ nCook_src = ./src/nCook.c \
 						./src/sqlite/initSqlite.h \
 						./src/sqlite/table.c \
 						./src/sqlite/table.h \
-						./src/sqlite/type.h
+						./src/sqlite/type.h \
+						./src/sqlite/select.c \
+						./src/sqlite/select.h \
+						./src/sqlite/insert.c \
+						./src/sqlite/insert.h
 
 nCook_obj = $(nCook_src:.c=.c.o) 
 
@@ -25,7 +29,11 @@ nCook_tests_Sqlite3_src = ./test/sqlite.c \
 													./src/sqlite/table.h \
 													./test/util/sqlite.c \
 													./test/util/sqlite.h \
-													./src/sqlite/type.h
+													./src/sqlite/type.h \
+													./src/sqlite/select.c \
+													./src/sqlite/select.h \
+													./src/sqlite/insert.c \
+													./src/sqlite/insert.h
 
 ifdef CODECOV
 	CFLAGS += ${codecov_FLAGS}

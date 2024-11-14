@@ -2,6 +2,8 @@
 // See end of file for extended copyright information.
 #include "util/sqlite.h"
 #include "sqlite/initSqlite.h"
+#include "sqlite/insert.h"
+#include "sqlite/select.h"
 #include "sqlite/table.h"
 #include "sqlite/type.h"
 #include <criterion/criterion.h>
@@ -105,6 +107,17 @@ Test(sqlite, createTableMultipleColumn, .fini = removeDataBase)
 Test(sqlite, createTableWithoutDataBase)
 {
   cr_assert_eq(TABLE("name", (Column){ "id", INT | PK }), -1);
+}
+
+Test(sqlite, insertInTable, .fini = removeDataBase)
+{
+  setenv("nCookDB", "./nCookCreate4.db", 1);
+  initDataBase();
+  TABLE("name",
+        (Column){ "id", INT | PK | NOTNULL },
+        (Column){ "name", TEXT | NOTNULL });
+  INSERT("name", 1, "toto");
+  closeDataBase();
 }
 // This file is part of nCook
 //
