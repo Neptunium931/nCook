@@ -27,6 +27,11 @@ nCook_tests_Sqlite3_src = ./test/sqlite.c \
 													./test/util/sqlite.h \
 													./src/sqlite/type.h
 
+ifdef CODECOV
+	CFLAGS += ${codecov_FLAGS}
+	LDFLAGS += ${codecov_FLAGS}
+endif
+
 nCook_tests_Sqlite3_obj = $(nCook_tests_Sqlite3_src:.c=.c.o)
 
 nCook: $(nCook_obj)
@@ -46,7 +51,7 @@ clean:
 check: $(TESTS)
 	for t in $(TESTS); do \
 		sh -c "./$$t --tap"; \
-	done
+		done
 
 distcheck:
 

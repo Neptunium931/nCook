@@ -14,6 +14,8 @@ CFLAGS += $(shell pkg-config --cflags sqlite3)
 CFLAGS += $(shell pkg-config --cflags ncurses)
 CFLAGS += -I./src
 CFLAGS += -std=c99 -fno-strict-aliasing -Wnested-externs -Wmissing-prototypes -Wstrict-prototypes -Wimplicit-function-declaration -Wold-style-definition -Wjump-misses-init -Wall -Wextra -Wundef -Wwrite-strings -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wno-unused-parameter -Wno-missing-field-initializers -Wformat=2 -Wcast-align -Wformat-nonliteral -Wformat-security -Wsign-compare -Wstrict-aliasing -Wshadow -Winline -Wpacked -Wmissing-format-attribute -Wmissing-noreturn -Winit-self -Wmissing-include-dirs -Wunused-but-set-variable -Warray-bounds -Wreturn-type -Wswitch-enum -Wswitch-default -Wduplicated-cond -Wduplicated-branches -Wlogical-op -Wrestrict -Wnull-dereference -Wdouble-promotion -Werror
+
+codecov_FLAGS += -fprofile-arcs -ftest-coverage
 # This file is part of nCook
 #
 # BSD 3-Clause License

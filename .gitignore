@@ -6,3 +6,5 @@ tags
 .cache
 compile_commands.json
 *.db
+*.gcda
+*.gcno
