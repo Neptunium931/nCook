@@ -96,6 +96,11 @@ Test(sqlite, createTableMultipleColumn, .fini = removeDataBase)
   cr_assert_eq(getTypeOfColumn("name", "name"), TEXT | NOTNULL);
   closeDataBase();
 }
+
+Test(sqlite, createTableWithoutDataBase)
+{
+  cr_assert_eq(TABLE("name", (Column){ "id", INT | PK }), -1);
+}
 // This file is part of nCook
 //
 // BSD 3-Clause License
