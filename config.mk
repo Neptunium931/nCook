@@ -4,6 +4,9 @@ CC = gcc
 CFLAGS ?= -g
 LDFLAGS ?= -g
 
+CFLAGS += -O0
+LDFLAGS += -O0
+
 LDFLAGS += -I./src
 LDFLAGS += $(shell pkg-config --libs sqlite3)
 LDFLAGS += $(shell pkg-config --libs ncurses)
