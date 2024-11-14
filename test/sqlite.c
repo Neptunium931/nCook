@@ -90,10 +90,15 @@ Test(sqlite, createTableMultipleColumn, .fini = removeDataBase)
 {
   setenv("nCookDB", "./nCookCreate4.db", 1);
   initDataBase();
-  TABLE(
-    "name", (Column){ "id", INT | PK }, (Column){ "name", TEXT | NOTNULL });
+  TABLE("name",
+        (Column){ "id", INT | PK | UNIQUE },
+        (Column){ "name", TEXT | NOTNULL },
+        (Column){ "text", TEXT | null },
+        (Column){ "blob", BLOB });
   cr_assert_eq(getTypeOfColumn("name", "id"), INT | PK | null);
   cr_assert_eq(getTypeOfColumn("name", "name"), TEXT | NOTNULL);
+  cr_assert_eq(getTypeOfColumn("name", "text"), TEXT | null);
+  cr_assert_eq(getTypeOfColumn("name", "blob"), BLOB | null);
   closeDataBase();
 }
 
