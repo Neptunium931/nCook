@@ -44,9 +44,15 @@ nCook_tests_Sqlite3: $(nCook_tests_Sqlite3_obj)
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(nCook_obj) $(nCook_tests_Sqlite3_obj)
 	rm -f $(TARGET)
 	rm -f $(TESTS)
+	find . -name "*.gcda" -exec rm -f {} \;
+	find . -name "*.gcno" -exec rm -f {} \;
+	find . -name "*.c.o" -exec rm -f {} \;
+	rm -f tags
+
+tags:
+	ctags -R .
 
 check: $(TESTS)
 	for t in $(TESTS); do \
