@@ -3,6 +3,9 @@
 #ifndef SELECT_H
 #define SELECT_H
 
+void **selectInTable(const char *name, ...);
+
+#define SELECT(...) ({ selectInTable(__VA_ARGS__); })
 #endif
 // This file is part of nCook
 //

@@ -1,7 +1,9 @@
 // Copyright (c) 2024, Tymothé BILLEREY <tymothe_billerey@fastmail.fr>
 // See end of file for extended copyright information.
 #include "insert.h"
+#include <sqlite3.h>
 
+extern sqlite3 *db;
 char
 insertInTable(const char *name, ...)
 {

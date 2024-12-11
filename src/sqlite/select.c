@@ -2,6 +2,16 @@
 // See end of file for extended copyright information.
 
 #include "select.h"
+#include <sqlite3.h>
+#include <stdio.h>
+
+extern sqlite3 *db;
+
+void **
+selectInTable(const char *name, ...)
+{
+  return NULL;
+}
 
 // This file is part of nCook
 //

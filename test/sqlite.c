@@ -117,6 +117,7 @@ Test(sqlite, insertInTable, .fini = removeDataBase)
         (Column){ "id", INT | PK | NOTNULL },
         (Column){ "name", TEXT | NOTNULL });
   INSERT("name", 1, "toto");
+  cr_assert_eq(SELECT("name", "id", 1), 1);
   closeDataBase();
 }
 // This file is part of nCook
