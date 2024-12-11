@@ -111,7 +111,7 @@ Test(sqlite, createTableWithoutDataBase)
 
 Test(sqlite, insertInTable, .fini = removeDataBase)
 {
-  setenv("nCookDB", "./nCookCreate4.db", 1);
+  setenv("nCookDB", "./nCookCreate5.db", 1);
   initDataBase();
   TABLE("name",
         (Column){ "id", INT | PK | NOTNULL },
